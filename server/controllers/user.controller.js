@@ -73,13 +73,17 @@ const editUser = async (req, res) => {
 
     const avatarUrl = await cloudinary.uploader.upload(avatar);
 
+    // Hash the password before storing it in the database
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     if (role === "admin") {
       await User.findByIdAndUpdate(
         {_id: id},
         {
           name,
           email,
-          password,
+          password: hashedPassword,
           role,
           avatar: avatarUrl.url || avatar
         }
@@ -90,7 +94,7 @@ const editUser = async (req, res) => {
         {
           name,
           email,
-          password,
+          password: hashedPassword,
           avatar: avatarUrl.url || avatar
         }
       )
