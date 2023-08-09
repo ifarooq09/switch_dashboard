@@ -29,7 +29,7 @@ const EditFloor = () => {
   const [floorData, setFloorData] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/floor/${id}`, {
+    fetch(`https://switch-dashboard-l646.onrender.com/api/v1/floor/${id}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -44,7 +44,7 @@ const EditFloor = () => {
           setFloorData(floorData);
 
           // Fetch building data after receiving floor data
-          fetch("http://localhost:8080/api/v1/building?_end=10&_start=0&", {
+          fetch("https://switch-dashboard-l646.onrender.com/api/v1/building?_end=10&_start=0&", {
             method: "GET",
           })
             .then((res) => res.json())

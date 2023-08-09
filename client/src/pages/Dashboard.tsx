@@ -47,7 +47,7 @@ const Dashboard = () => {
 
   // Fetch building data from the backend
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/building?_end=4&_start=0&")
+    fetch("https://switch-dashboard-l646.onrender.com/api/v1/building?_end=4&_start=0&")
       .then((res) => res.json())
       .then((data) => {
         setBuildingData(data);
@@ -56,7 +56,7 @@ const Dashboard = () => {
         console.error("Failed to fetch building data:", error);
       });
 
-    fetch("http://localhost:8080/api/v1/port?_end=4&_start=0&")
+    fetch("https://switch-dashboard-l646.onrender.com/api/v1/port?_end=4&_start=0&")
       .then((res) => res.json())
       .then((data) => {
         setPortData(data);

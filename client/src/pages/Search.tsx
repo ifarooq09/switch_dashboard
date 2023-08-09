@@ -68,16 +68,16 @@ const Search = () => {
       try {
         // Fetch data for each model and assign to the corresponding variables
         const buildingData = await fetch(
-          "http://localhost:8080/api/v1/building?_end=10&_start=0&"
+          "https://switch-dashboard-l646.onrender.com/api/v1/building?_end=10&_start=0&"
         );
         const floorData = await fetch(
-          "http://localhost:8080/api/v1/floor?_end=10&_start=0&"
+          "https://switch-dashboard-l646.onrender.com/api/v1/floor?_end=10&_start=0&"
         );
         const switchData = await fetch(
-          "http://localhost:8080/api/v1/switch?_end=10&_start=0&"
+          "https://switch-dashboard-l646.onrender.com/api/v1/switch?_end=10&_start=0&"
         );
         const portData = await fetch(
-          "http://localhost:8080/api/v1/port?_end=10&_start=0&"
+          "https://switch-dashboard-l646.onrender.com/api/v1/port?_end=10&_start=0&"
         );
 
         const [buildingResults, floorResults, switchResults, portResults] =

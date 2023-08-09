@@ -12,7 +12,7 @@ interface UserData {
 }
 
 const fetchUserDataFromDatabase = (userId: any) => {
-  return fetch(`http://localhost:8080/api/v1/user/${userId}`)
+  return fetch(`https://switch-dashboard-l646.onrender.com/api/v1/user/${userId}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

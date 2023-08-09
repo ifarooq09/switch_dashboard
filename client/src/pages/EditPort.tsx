@@ -36,7 +36,7 @@ interface PortData {
 }
 
 const fetchPortDataFromDatabase = (portId: any) => {
-  return fetch(`http://localhost:8080/api/v1/port/${portId}`)
+  return fetch(`https://switch-dashboard-l646.onrender.com/api/v1/port/${portId}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

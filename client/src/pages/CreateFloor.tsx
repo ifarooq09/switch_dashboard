@@ -27,7 +27,7 @@ const CreateFloor = () => {
   >(buildingData[0]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/building?_end=10&_start=0&", {
+    fetch("https://switch-dashboard-l646.onrender.com/api/v1/building?_end=10&_start=0&", {
       method: "GET",
     })
       .then((res) => res.json())

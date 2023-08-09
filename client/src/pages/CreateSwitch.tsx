@@ -43,7 +43,7 @@ const CreateSwitch = () => {
   >([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/building?_end=10&_start=0&", {
+    fetch("https://switch-dashboard-l646.onrender.com/api/v1/building?_end=10&_start=0&", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -59,7 +59,7 @@ const CreateSwitch = () => {
 
   useEffect(() => {
     if (selectedBuilding) {
-      fetch(`http://localhost:8080/api/v1/building/${selectedBuilding._id}`, {
+      fetch(`https://switch-dashboard-l646.onrender.com/api/v1/building/${selectedBuilding._id}`, {
         method: "GET",
       })
         .then((res) => res.json())
