@@ -17,7 +17,7 @@ const app = express()
 
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'http://10.8.220.158:8085',
     credentials: true,            //access-control-allow-credentials:true
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
