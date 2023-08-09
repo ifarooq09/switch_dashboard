@@ -302,7 +302,9 @@ const SwitchDetails = () => {
               gap: 3,
             }}
           >
-            {allPorts.map((port: allPorts) => (
+            {allPorts
+            .sort((a: any, b: any) => a.interfaceDetail.localeCompare(b.interfaceDetail))
+            .map((port: allPorts) => (
               <PortCard
                 key={port._id}
                 id={port._id}
