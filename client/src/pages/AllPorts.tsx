@@ -139,7 +139,9 @@ const AllPorts = () => {
           gap: 3,
         }}
       >
-        {allPorts.map((ports: any) => (
+        {allPorts
+        .sort((a: any, b: any) => a.interfaceDetail.localeCompare(b.interfaceDetail))
+        .map((ports: any) => (
           <PortCard
             key={ports._id}
             id={ports._id}
