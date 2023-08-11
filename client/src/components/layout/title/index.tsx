@@ -4,7 +4,7 @@ import React from "react";
 
 import { logo, mail } from "assets";
 
-type TitlePropsType = typeof TitleProps
+type TitlePropsType = TitleProps
 
 export const Title: React.FC<TitlePropsType> = ({ collapsed }) => {
   const { Link } = useRouterContext();

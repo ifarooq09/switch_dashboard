@@ -40,7 +40,7 @@ import React, { useState } from "react";
 
 import { Title as DefaultTitle } from "../title";
 
-type TreeMenuType = typeof ITreeMenu;
+type TreeMenuType = ITreeMenu;
 
 export const Sider: typeof DefaultSider = ({ render }) => {
   const [collapsed, setCollapsed] = useState(false);

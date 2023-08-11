@@ -89,7 +89,7 @@ const AllPorts = () => {
                   currentFilterValues.ciscophone ||
                   currentFilterValues.mac
                 }
-                onChange={(e) => {
+                onChange={(e: any) => {
                   setFilters([
                     {
                       field: "title",
@@ -140,7 +140,7 @@ const AllPorts = () => {
         }}
       >
         {allPorts
-        .sort((a: any, b: any) => a.interfaceDetail.localeCompare(b.interfaceDetail))
+        .sort((a: any, b: any) => parseInt(a.interfaceDetail) - parseInt(b.interfaceDetail))
         .map((ports: any) => (
           <PortCard
             key={ports._id}
