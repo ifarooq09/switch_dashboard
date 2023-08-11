@@ -51,6 +51,19 @@ const AllPorts = () => {
   if (isLoading) return <Typography>Loading...</Typography>;
   if (isError) return <Typography>Error...</Typography>;
 
+  const customSort = (a: any, b: any) => {
+    const partsA = a.interfaceDetail.match(/(\d+)/g).map((part: string) => parseInt(part));
+    const partsB = b.interfaceDetail.match(/(\d+)/g).map((part: string) => parseInt(part));
+  
+    for (let i = 0; i < Math.min(partsA.length, partsB.length); i++) {
+      if (partsA[i] !== partsB[i]) {
+        return partsA[i] - partsB[i];
+      }
+    }
+  
+    return partsA.length - partsB.length;
+  };
+
   return (
     <Box>
       <Box
@@ -140,7 +153,7 @@ const AllPorts = () => {
         }}
       >
         {allPorts
-        .sort((a: any, b: any) => parseInt(a.interfaceDetail) - parseInt(b.interfaceDetail))
+        .sort(customSort)
         .map((ports: any) => (
           <PortCard
             key={ports._id}

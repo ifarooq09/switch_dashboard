@@ -88,6 +88,19 @@ const SwitchDetails = () => {
     }
   };
 
+  const customSort = (a: any, b: any) => {
+    const partsA = a.interfaceDetail.match(/(\d+)/g).map((part: string) => parseInt(part));
+    const partsB = b.interfaceDetail.match(/(\d+)/g).map((part: string) => parseInt(part));
+  
+    for (let i = 0; i < Math.min(partsA.length, partsB.length); i++) {
+      if (partsA[i] !== partsB[i]) {
+        return partsA[i] - partsB[i];
+      }
+    }
+  
+    return partsA.length - partsB.length;
+  };
+
   return (
     <>
       <Box borderRadius="15px" padding="20px" bgcolor="#FCFCFC" width="100%">
@@ -303,7 +316,7 @@ const SwitchDetails = () => {
             }}
           >
             {allPorts
-            .sort((a: any, b: any) => parseInt(a.interfaceDetail) - parseInt(b.interfaceDetail))
+            .sort(customSort)
             .map((port: allPorts) => (
               <PortCard
                 key={port._id}
