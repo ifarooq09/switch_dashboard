@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGetIdentity } from "@refinedev/core";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "@refinedev/react-hook-form";
 import { FieldValues } from "react-hook-form";
 import PortForm from "components/common/PortForm";
@@ -33,6 +33,11 @@ const CreatePort = () => {
     register,
     handleSubmit,
   } = useForm();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search)
+  const source = queryParams.get("source")
+  const switchId = queryParams.get("switchId")
 
   const [buildingData, setBuildingData] = useState<Building[]>([]);
   const [selectedBuilding, setSelectedBuilding] = useState<
@@ -161,7 +166,13 @@ const CreatePort = () => {
     };
 
     await onFinish(SwitchData);
-    navigate("/port", { replace: true });
+
+    if(source === "port") {
+      navigate("/port", { replace: true });
+    } else if (source === "switch") {
+      navigate(`/switch/show/${switchId}`, { replace: true });
+    }
+    
   };
 
   return (

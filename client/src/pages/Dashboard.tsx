@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { BuildingCard, PortCard } from "components";
+import { BuildingCard } from "components";
 
 interface Building {
   _id: string;
@@ -10,44 +10,44 @@ interface Building {
   // Add other properties as needed
 }
 
-interface Floor {
-  _id: string;
-  floorNumber: string;
-  building: Building[];
-  // Add other properties as needed
-}
+// interface Floor {
+//   _id: string;
+//   floorNumber: string;
+//   building: Building[];
+//   // Add other properties as needed
+// }
 
-interface Switch {
-  _id: string;
-  title: string;
-  ip: string;
-  floor: Floor[];
-  building: Building[];
-  // Add other properties as needed
-}
+// interface Switch {
+//   _id: string;
+//   title: string;
+//   ip: string;
+//   floor: Floor[];
+//   building: Building[];
+//   // Add other properties as needed
+// }
 
-interface Port {
-  _id: string;
-  interfaceDetail: string;
-  title: string;
-  ciscophone: string;
-  mac: string;
-  switchDetail: Switch[];
-  floor: Floor[];
-  building: Building[];
-  // Add other properties as needed
-}
+// interface Port {
+//   _id: string;
+//   interfaceDetail: string;
+//   title: string;
+//   ciscophone: string;
+//   mac: string;
+//   switchDetail: Switch[];
+//   floor: Floor[];
+//   building: Building[];
+//   // Add other properties as needed
+// }
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
   const [buildingData, setBuildingData] = useState<Building[]>([]);
 
-  const [portData, setPortData] = useState<Port[]>([]);
+  // const [portData, setPortData] = useState<Port[]>([]);
 
   // Fetch building data from the backend
   useEffect(() => {
-    fetch("https://switch-dashboard-l646.onrender.com/api/v1/building?_end=4&_start=0&")
+    fetch("https://switch-dashboard-l646.onrender.com/api/v1/building?_end=16&_start=0&")
       .then((res) => res.json())
       .then((data) => {
         setBuildingData(data);
@@ -56,14 +56,14 @@ const Dashboard = () => {
         console.error("Failed to fetch building data:", error);
       });
 
-    fetch("https://switch-dashboard-l646.onrender.com/api/v1/port?_end=4&_start=0&")
-      .then((res) => res.json())
-      .then((data) => {
-        setPortData(data);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch floor data:", error);
-      });
+    // fetch("http://localhost:8080/api/v1/port?_end=4&_start=0&")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setPortData(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Failed to fetch floor data:", error);
+    //   });
   }, []);
 
   return (
@@ -142,7 +142,7 @@ const Dashboard = () => {
       </Box>
 
       {/* Port Icons and Names */}
-      <Box
+      {/* <Box
         flex={1}
         borderRadius="15px"
         padding="20px"
@@ -183,7 +183,7 @@ const Dashboard = () => {
         ) :  "There is no data in All Ports"}
     
         {/* Centered Typography and Button */}
-        <Box mt={2.5} display="flex" flexDirection="column" alignItems="center">
+        {/* <Box mt={2.5} display="flex" flexDirection="column" alignItems="center">
           <Button
             variant="outlined"
             onClick={() => navigate("/floor")}
@@ -196,7 +196,7 @@ const Dashboard = () => {
             Go to All Ports
           </Button>
         </Box>
-      </Box>
+      </Box> */} 
     </div>
   );
 };

@@ -6,7 +6,9 @@ import { ChatBubble, Delete, Edit, Phone } from "@mui/icons-material";
 import { CustomButton } from "components";
 import { PortCard } from "components";
 
-type UserRole= "admin" | "editor";
+import { Add } from "@mui/icons-material";
+
+type UserRole = "admin" | "editor";
 
 interface allPorts {
   _id: string;
@@ -35,7 +37,8 @@ function checkImage(url: any) {
 const SwitchDetails = () => {
   const navigate = useNavigate();
 
-  const userRole = (JSON.parse(localStorage.getItem("user") || "{}").role || "editor") as UserRole;
+  const userRole = (JSON.parse(localStorage.getItem("user") || "{}").role ||
+    "editor") as UserRole;
 
   //Define roles and their corresponding permissions
   const rolesPermissions = {
@@ -44,10 +47,10 @@ const SwitchDetails = () => {
   };
 
   //Get the user's permissions based on their role
-  const userPermissions = rolesPermissions[userRole] || []
+  const userPermissions = rolesPermissions[userRole] || [];
 
   const { data: user } = useGetIdentity({
-    v3LegacyAuthProviderCompatible: true
+    v3LegacyAuthProviderCompatible: true,
   });
   const { queryResult } = useShow();
   const { mutate } = useDelete();
@@ -89,15 +92,19 @@ const SwitchDetails = () => {
   };
 
   const customSort = (a: any, b: any) => {
-    const partsA = a.interfaceDetail.match(/(\d+)/g).map((part: string) => parseInt(part));
-    const partsB = b.interfaceDetail.match(/(\d+)/g).map((part: string) => parseInt(part));
-  
+    const partsA = a.interfaceDetail
+      .match(/(\d+)/g)
+      .map((part: string) => parseInt(part));
+    const partsB = b.interfaceDetail
+      .match(/(\d+)/g)
+      .map((part: string) => parseInt(part));
+
     for (let i = 0; i < Math.min(partsA.length, partsB.length); i++) {
       if (partsA[i] !== partsB[i]) {
         return partsA[i] - partsB[i];
       }
     }
-  
+
     return partsA.length - partsB.length;
   };
 
@@ -283,15 +290,15 @@ const SwitchDetails = () => {
                 />
                 {userPermissions.includes("delete") ? (
                   <CustomButton
-                  title={!isCurrentUser ? "Call" : "Delete"}
-                  backgroundColor={!isCurrentUser ? "#2ED480" : "#d42e2e"}
-                  color="#FCFCFC"
-                  fullWidth
-                  icon={!isCurrentUser ? <Phone /> : <Delete />}
-                  handleClick={() => {
-                    if (isCurrentUser) handleDeleteSwitch();
-                  }}
-                />
+                    title={!isCurrentUser ? "Call" : "Delete"}
+                    backgroundColor={!isCurrentUser ? "#2ED480" : "#d42e2e"}
+                    color="#FCFCFC"
+                    fullWidth
+                    icon={!isCurrentUser ? <Phone /> : <Delete />}
+                    handleClick={() => {
+                      if (isCurrentUser) handleDeleteSwitch();
+                    }}
+                  />
                 ) : null}
               </Stack>
             </Stack>
@@ -299,9 +306,29 @@ const SwitchDetails = () => {
         </Box>
       </Box>
       <Box marginTop={3}>
-        <Typography fontSize={25} fontWeight={700} color="#11142D">
-          Ports
-        </Typography>
+        <Box
+          marginTop={3}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography fontSize={25} fontWeight={700} color="#11142D">
+            Ports
+          </Typography>
+
+          {userPermissions.includes("create") ? (
+            <CustomButton
+              title="Add Port"
+              handleClick={() => navigate(`/port/create?source=switch&switchId=${switchDetails._id}`)}
+              backgroundColor="#475be8"
+              color="#fcfcfc"
+              icon={<Add />}
+            />
+          ) : null}
+        </Box>
+
         {allPorts.length === 0 ? (
           <Typography fontSize={18} fontWeight={400} color="#11142D">
             - There is no Port in this Switch
@@ -315,9 +342,7 @@ const SwitchDetails = () => {
               gap: 3,
             }}
           >
-            {allPorts
-            .sort(customSort)
-            .map((port: allPorts) => (
+            {allPorts.sort(customSort).map((port: allPorts) => (
               <PortCard
                 key={port._id}
                 id={port._id}

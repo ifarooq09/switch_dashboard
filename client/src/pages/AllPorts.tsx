@@ -42,8 +42,7 @@ const AllPorts = () => {
     );
     return {
       title: logicalFilters.find((item: any) => item.field === "title")?.value || "",
-      ciscophone:
-        logicalFilters.find((item: any) => item.field === "ciscophone")?.value || "",
+      ciscophone:logicalFilters.find((item: any) => item.field === "ciscophone")?.value || "",
       mac: logicalFilters.find((item: any) => item.field === "mac")?.value || "",
     };
   }, [filters]);
@@ -102,7 +101,7 @@ const AllPorts = () => {
                   currentFilterValues.ciscophone ||
                   currentFilterValues.mac
                 }
-                onChange={(e: any) => {
+                onChange={(e) => {
                   setFilters([
                     {
                       field: "title",
@@ -137,7 +136,7 @@ const AllPorts = () => {
         {userPermissions.includes("create") ? (
           <CustomButton
           title="Add Port"
-          handleClick={() => navigate("/port/create")}
+          handleClick={() => navigate("/port/create?source=port")}
           backgroundColor="#475be8"
           color="#fcfcfc"
           icon={<Add />}
@@ -153,7 +152,7 @@ const AllPorts = () => {
         }}
       >
         {allPorts
-        .sort(customSort)
+        .sort(customSort) // Sort ports by interfaceDetail
         .map((ports: any) => (
           <PortCard
             key={ports._id}

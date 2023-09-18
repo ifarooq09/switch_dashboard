@@ -206,7 +206,7 @@ const PortForm = ({
                 ))}
               </Select>
             </FormControl>
-            <FormControl>
+            {/* <FormControl>
               <FormHelperText
                 sx={{
                   fontWeight: 500,
@@ -230,7 +230,7 @@ const PortForm = ({
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl> */}
             <CustomButton
               type="submit"
               title={formLoading ? `${type}ing...` : `${type}`}
